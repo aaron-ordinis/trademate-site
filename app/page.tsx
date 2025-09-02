@@ -270,9 +270,9 @@ function PricingCard(props: {
     : 'border hover:bg-slate-50';
 
   return (
-    <div className={rounded-3xl border p-6 sm:p-8 shadow-sm bg-white ${ring}}>
+    <div className={`rounded-3xl border p-6 sm:p-8 shadow-sm bg-white ${ring}`}>
       <div className="flex items-center justify-between mb-3">
-        <span className={text-xs uppercase tracking-wider px-2 py-1 rounded ${badgeStyle}}>
+        <span className={`text-xs uppercase tracking-wider px-2 py-1 rounded ${badgeStyle}`}>
           {props.badge}
         </span>
       </div>
@@ -293,7 +293,7 @@ function PricingCard(props: {
 
       <a
         href={props.href}
-        className={w-full inline-flex justify-center rounded-full px-5 py-3 font-semibold ${ctaStyle}}
+        className={`w-full inline-flex justify-center rounded-full px-5 py-3 font-semibold ${ctaStyle}`}
       >
         {props.cta}
       </a>
