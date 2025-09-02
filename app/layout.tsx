@@ -1,5 +1,5 @@
 import './globals.css';
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 
 export const metadata: Metadata = {
   title: 'TradeMate Quotes — Professional Quotes in Minutes',
@@ -16,8 +16,11 @@ export const metadata: Metadata = {
     'plumbers',
     'electricians',
   ],
-  authors: [{ name: 'TradeMate Quotes', url: 'https://trademateapp-site.vercel.app' }],
-  metadataBase: new URL('https://trademateapp-site.vercel.app'),
+  authors: [{ name: 'TradeMate Quotes', url: 'https://tradematequotes.com' }],
+  metadataBase: new URL('https://tradematequotes.com'),
+  alternates: {
+    canonical: 'https://tradematequotes.com',
+  },
 
   // Favicons / Icons
   icons: {
@@ -26,21 +29,14 @@ export const metadata: Metadata = {
     apple: '/apple-touch-icon.png',
   },
 
-  // Open Graph (Facebook, LinkedIn, WhatsApp previews)
+  // Open Graph (Facebook, LinkedIn, WhatsApp)
   openGraph: {
     title: 'TradeMate Quotes — Professional Quotes in Minutes',
     description:
       'Create AI-powered quotes in minutes. Save time, look professional, and win more work.',
-    url: 'https://trademateapp-site.vercel.app',
+    url: 'https://tradematequotes.com',
     siteName: 'TradeMate Quotes',
-    images: [
-      {
-        url: '/og-image.png', // make sure you have this in /public
-        width: 1200,
-        height: 630,
-        alt: 'TradeMate Quotes App Preview',
-      },
-    ],
+    images: [{ url: '/opengraph-image', width: 1200, height: 630 }],
     locale: 'en_GB',
     type: 'website',
   },
@@ -51,12 +47,16 @@ export const metadata: Metadata = {
     title: 'TradeMate Quotes — Professional Quotes in Minutes',
     description:
       'AI-powered quoting for tradespeople. Save time and impress clients with branded PDFs.',
-    images: ['/og-image.png'],
+    images: ['/twitter-image'],
   },
 
-  // App Store / PWA style
-  themeColor: '#0f172a',
+  // PWA
   manifest: '/site.webmanifest',
+};
+
+// Move themeColor to viewport to avoid the Next.js warning
+export const viewport: Viewport = {
+  themeColor: '#0f172a',
 };
 
 export default function RootLayout({

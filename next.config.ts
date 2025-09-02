@@ -33,7 +33,6 @@ const nextConfig: NextConfig = {
 
   async headers() {
     return [
-      // Security headers on all routes
       {
         source: "/:path*",
         headers: [
@@ -59,7 +58,6 @@ const nextConfig: NextConfig = {
           },
         ],
       },
-      // Aggressive cache for static assets
       {
         source: "/:all*(svg|jpg|jpeg|png|gif|ico|webp|avif|woff2|woff|ttf|eot)",
         headers: [
@@ -68,16 +66,18 @@ const nextConfig: NextConfig = {
       },
     ];
   },
-    async redirects() {
-      return [
-        {
-          source: "/:path*",
-          destination: "https://tradematequotes.com/:path*",
-          permanent: true,
-        },
-      ];
-    },
-  // No redirects for vercel.app
+
+  // WWW -> apex; leave vercel.app alone for previews
+  async redirects() {
+    return [
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "www.tradematequotes.com" }],
+        destination: "https://tradematequotes.com/:path*",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;
