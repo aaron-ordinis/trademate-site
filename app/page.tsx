@@ -1,21 +1,20 @@
 'use client';
 
 import Image from 'next/image';
+import Link from 'next/link';
 import { useMemo } from 'react';
 
 export default function Home() {
-  // Current year memo to avoid re-render churn
   const year = useMemo(() => new Date().getFullYear(), []);
 
   return (
     <main className="min-h-screen bg-[radial-gradient(1000px_600px_at_50%_-10%,#e8eefc,transparent)] from-white to-slate-50 text-slate-900">
       {/* ===== Header / Nav ===== */}
       <header className="sticky top-0 z-30 backdrop-blur supports-[backdrop-filter]:bg-white/60 bg-white/90 border-b">
-        <div className="mx-auto max-w-6xl px-4 py-3 flex items-center justify-between">
-          <a href="/" className="flex items-center gap-3">
+          <Link href="/" className="flex items-center gap-3">
             <Image src="/logo.png" alt="TradeMate logo" width={36} height={36} priority />
             <span className="font-semibold tracking-tight">TradeMate Quotes</span>
-          </a>
+          </Link>
 
           <nav className="hidden sm:flex items-center gap-6 text-sm text-slate-600">
             <a className="hover:text-slate-900" href="#why">Why TradeMate</a>
@@ -24,14 +23,13 @@ export default function Home() {
             <a className="hover:text-slate-900" href="/faqs">FAQs</a>
           </nav>
 
-          <a
-            href="#download"
-            className="rounded-full border px-4 py-2 text-sm font-medium hover:bg-slate-100"
-            aria-label="Go to download section"
-          >
-            Download
-          </a>
-        </div>
+        <a
+          href="#download"
+          className="rounded-full border px-4 py-2 text-sm font-medium hover:bg-slate-100"
+          aria-label="Go to download section"
+        >
+          Download
+        </a>
       </header>
 
       {/* ===== Hero ===== */}
@@ -175,7 +173,7 @@ export default function Home() {
               rel="noreferrer"
               aria-label="Open Apple App Store"
             >
-               Apple App Store
+               Apple App Store
             </a>
             <a
               className="inline-flex items-center justify-center gap-2 rounded-full border px-6 py-3 hover:bg-slate-50"
@@ -184,7 +182,7 @@ export default function Home() {
               rel="noreferrer"
               aria-label="Open Google Play Store"
             >
-               Google Play Store
+              ▶ Google Play Store
             </a>
           </div>
         </div>
