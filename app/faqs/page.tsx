@@ -130,7 +130,6 @@ export default function FaqPage() {
       {/* JSON-LD for rich results */}
       <script
         type="application/ld+json"
-        // @ts-ignore – we know this is safe JSON
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
     </main>
