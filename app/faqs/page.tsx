@@ -1,137 +1,239 @@
-// app/faqs/page.tsx
-import type { Metadata } from 'next';
+'use client';
 
-export const metadata: Metadata = {
-  title: 'FAQs — TradeMate Quotes',
-  description:
-    'Answers to common questions about TradeMate Quotes: pricing, features, data, privacy, location, Stripe billing and account deletion.',
-  alternates: { canonical: 'https://tradematequotes.com/faqs' },
-};
+import Image from 'next/image';
+import { motion } from 'framer-motion';
 
-type QA = { q: string; a: React.ReactNode };
-
-const FAQS: QA[] = [
-  {
-    q: 'What is TradeMate Quotes?',
-    a: 'A simple app for tradespeople to create professional, branded quotes in minutes — then export polished PDFs you can send to customers.',
-  },
-  {
-    q: 'How much does it cost?',
-    a: (
-      <>
-        The Free plan lets you generate <b>1 AI quote per day</b>.
-        Premium is <b>£4.99/mo</b> or <b>£47.99/yr</b> and unlocks unlimited quotes,
-        branded PDFs without watermark, editing/duplicating, multiple templates and priority support.
-        Prices include VAT where applicable.
-      </>
-    ),
-  },
-  {
-    q: 'Do you store my card details?',
-    a: (
-      <>
-        No. Payments are processed by <b>Stripe</b>. We do not store full card numbers — only minimal
-        billing metadata (e.g. subscription status) so your plan works.
-      </>
-    ),
-  },
-  {
-    q: 'Do you use my location?',
-    a: (
-      <>
-        Location is optional and only used when you enable features powered by <b>Google Maps/Places</b> (like address autocomplete).
-        You can disable location permissions in your device settings; the app still works, but some features may be limited.
-      </>
-    ),
-  },
-  {
-    q: 'How do I delete my account and data?',
-    a: (
-      <>
-        In the app, go to <b>Support → Delete account</b>. This permanently deletes your account, logos and ALL data. This action cannot be undone.
-      </>
-    ),
-  },
-  {
-    q: 'Where can I read the legal docs?',
-    a: (
-      <>
-        <a className="text-slate-900 underline" href="/privacy">Privacy Policy</a>,{' '}
-        <a className="text-slate-900 underline" href="/terms">Terms</a>,{' '}
-        <a className="text-slate-900 underline" href="/cookies">Cookie Policy</a>.
-      </>
-    ),
-  },
-  {
-    q: 'How do I get help?',
-    a: (
-      <>
-        Email <a className="text-slate-900 underline" href="mailto:hello@tradematequotes.com">hello@tradematequotes.com</a>
-        {' '}or use <b>Support</b> inside the app to contact us or report a bug.
-      </>
-    ),
-  },
-];
-
-export default function FaqPage() {
-  // Build JSON-LD for FAQ rich results
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: FAQS.map(item => ({
-      '@type': 'Question',
-      name: item.q,
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text:
-          typeof item.a === 'string'
-            ? item.a
-            : undefined, // keep simple; rich HTML isn’t required
-      },
-    })),
-  };
-
+export default function Home() {
   return (
     <main className="min-h-screen bg-gradient-to-b from-white to-slate-50 text-slate-900">
-      <section className="mx-auto max-w-4xl px-4 py-12">
-        <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight mb-2">Frequently Asked Questions</h1>
-        <p className="text-slate-600 mb-8">
-          Quick answers about pricing, features, privacy and billing.
+      {/* Hero */}
+      <section className="mx-auto max-w-6xl px-4 pt-12 pb-14 text-center">
+        {/* Animated mascot/logo */}
+        <motion.div
+          className="flex justify-center mb-6"
+          initial={{ opacity: 0, y: -20, scale: 0.9 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ duration: 0.8, ease: 'easeOut' }}
+        >
+          <Image
+            src="/logo.png"
+            alt="TradeMate Mascot"
+            width={140}
+            height={140}
+            priority
+          />
+        </motion.div>
+
+        <h1 className="mx-auto max-w-3xl text-4xl sm:text-6xl font-extrabold tracking-tight leading-tight">
+          Professional Quotes in Minutes —{" "}
+          <span className="bg-gradient-to-r from-slate-900 to-slate-600 bg-clip-text text-transparent">
+            Powered by AI
+          </span>
+        </h1>
+
+        <p className="mx-auto mt-5 max-w-2xl text-lg text-slate-600">
+          Save time, win more work, and impress clients with branded, polished PDFs.
+          Built for trades — electricians, plumbers, builders and more.
         </p>
 
-        <div className="space-y-4">
-          {FAQS.map((item, i) => (
-            <details
-              key={i}
-              className="group rounded-2xl border bg-white p-5 sm:p-6 shadow-sm open:shadow-md transition-shadow"
-            >
-              <summary className="cursor-pointer select-none list-none font-semibold text-lg flex items-center justify-between">
-                <span>{item.q}</span>
-                <span className="ml-4 text-slate-400 group-open:rotate-180 transition-transform">▾</span>
-              </summary>
-              <div className="mt-3 text-slate-700 leading-relaxed">{item.a}</div>
-            </details>
-          ))}
-        </div>
-
-        {/* Contact box */}
-        <div className="mt-10 rounded-2xl border bg-white p-6 sm:p-8 shadow-sm">
-          <h2 className="text-xl font-bold mb-2">Still need help?</h2>
-          <p className="text-slate-600">
-            Email us at{' '}
-            <a className="text-slate-900 underline" href="mailto:hello@tradematequotes.com">
-              hello@tradematequotes.com
-            </a>
-            {' '}or open the Support section in the app.
-          </p>
+        <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
+          <a
+            href="#pricing"
+            className="rounded-full bg-slate-900 text-white px-7 py-3 text-sm font-semibold shadow hover:opacity-90"
+          >
+            View Pricing
+          </a>
+          <a
+            href="#why"
+            className="rounded-full border px-7 py-3 text-sm font-semibold hover:bg-white"
+          >
+            Why TradeMate?
+          </a>
+          <a
+            href="/faqs"
+            className="rounded-full border px-7 py-3 text-sm font-semibold hover:bg-white"
+          >
+            FAQs
+          </a>
         </div>
       </section>
 
-      {/* JSON-LD for rich results */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+      {/* Why Use */}
+      <section id="why" className="mx-auto max-w-5xl px-4 py-10">
+        <div className="rounded-2xl border bg-white p-6 sm:p-8 shadow-sm">
+          <h2 className="text-2xl font-bold mb-2">Why Use TradeMate?</h2>
+          <p className="text-slate-600 mb-4">
+            Because your time is valuable — and your quotes should look professional without the hassle.
+          </p>
+          <ul className="grid sm:grid-cols-2 gap-3 text-slate-800">
+            <li>✅ <b>Save Hours</b> — create quotes in minutes</li>
+            <li>✅ <b>Look Professional</b> — branded PDFs that build trust</li>
+            <li>✅ <b>Stay Organised</b> — jobs, prices, and quotes in one place</li>
+            <li>✅ <b>Win More Work</b> — reply faster than competitors</li>
+            <li>✅ <b>Focus on Earning</b> — less paperwork, more time on the tools</li>
+          </ul>
+        </div>
+      </section>
+
+      {/* Features */}
+      <section className="mx-auto max-w-5xl px-4 py-4">
+        <div className="grid sm:grid-cols-3 gap-4">
+          <FeatureCard title="AI-Powered">
+            Generate clear, itemised quotes from simple job notes.
+          </FeatureCard>
+          <FeatureCard title="Branded PDFs">
+            Your logo, your details — look polished and consistent.
+          </FeatureCard>
+          <FeatureCard title="Fast Workflow">
+            Duplicate, edit, and send in a few taps.
+          </FeatureCard>
+        </div>
+      </section>
+
+      {/* Pricing */}
+      <section id="pricing" className="mx-auto max-w-5xl px-4 py-12">
+        <h2 className="text-2xl font-bold text-center mb-6">Choose Your Plan</h2>
+        <div className="grid sm:grid-cols-2 gap-6">
+          <PricingCard
+            badge="Free"
+            price="£0"
+            period="forever"
+            cta="Start Free"
+            href="#download"
+            features={[
+              'Create 1 AI-powered quote per day',
+              'Includes “Made with TradeMate” branding',
+              'Organise jobs & pricing in one place',
+              'Basic tools',
+            ]}
+          />
+          <PricingCard
+            badge="Premium"
+            highlight
+            price="£4.99"
+            period="per month (or £47.99/yr)"
+            cta="Go Premium"
+            href="#download"
+            features={[
+              'Generate unlimited AI-powered quotes',
+              'Branded PDFs with your logo (no TradeMate watermark)',
+              'Edit & duplicate quotes in seconds',
+              'Priority support + future updates',
+            ]}
+          />
+        </div>
+      </section>
+
+      {/* How It Works */}
+      <section className="mx-auto max-w-5xl px-4 py-10">
+        <div className="rounded-2xl border bg-white p-6 sm:p-8 shadow-sm">
+          <h2 className="text-2xl font-bold mb-2">How Easy Is It?</h2>
+          <p className="text-slate-600 mb-4">3 simple steps — from job to quote in minutes.</p>
+          <ol className="space-y-3 text-slate-800">
+            <li>1️⃣ <b>Create Your Business Profile</b> — add your logo and details once.</li>
+            <li>2️⃣ <b>Insert the Job Description</b> — AI drafts a clear, professional quote.</li>
+            <li>3️⃣ <b>Share with Customers</b> — export a polished PDF and send instantly.</li>
+          </ol>
+        </div>
+      </section>
+
+      {/* Download */}
+      <section id="download" className="mx-auto max-w-5xl px-4 pb-16">
+        <div className="rounded-2xl border bg-white p-6 sm:p-8 shadow-sm text-center">
+          <h3 className="text-xl font-semibold mb-4">Get TradeMate Quotes</h3>
+          <p className="text-slate-600 mb-6">Start free. Upgrade anytime.</p>
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <a
+              className="inline-flex items-center justify-center gap-2 rounded-full border px-6 py-3 hover:bg-slate-100"
+              href="https://apps.apple.com"
+              target="_blank"
+              rel="noreferrer"
+            >
+               Apple App Store
+            </a>
+            <a
+              className="inline-flex items-center justify-center gap-2 rounded-full border px-6 py-3 hover:bg-slate-100"
+              href="https://play.google.com"
+              target="_blank"
+              rel="noreferrer"
+            >
+              ▶ Google Play Store
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="border-t">
+        <div className="mx-auto max-w-5xl px-4 py-6 text-sm text-slate-500 flex flex-col sm:flex-row items-center justify-between gap-3">
+          <span>© TradeMate {new Date().getFullYear()}</span>
+          <nav className="flex items-center gap-4">
+            <a className="hover:underline" href="/privacy">Privacy</a>
+            <a className="hover:underline" href="/terms">Terms</a>
+            <a className="hover:underline" href="/cookies">Cookies</a>
+            <a className="hover:underline" href="mailto:hello@tradematequotes.com">Contact</a>
+          </nav>
+        </div>
+      </footer>
     </main>
+  );
+}
+
+/* ------- small components ------- */
+
+function FeatureCard(props: { title: string; children: React.ReactNode }) {
+  return (
+    <div className="rounded-2xl border bg-white p-6 shadow-sm">
+      <h3 className="font-semibold text-lg mb-1">{props.title}</h3>
+      <p className="text-slate-600">{props.children}</p>
+    </div>
+  );
+}
+
+function PricingCard(props: {
+  badge: string;
+  price: string;
+  period: string;
+  cta: string;
+  href: string;
+  features: string[];
+  highlight?: boolean;
+}) {
+  return (
+    <div
+      className={`rounded-2xl border p-6 sm:p-8 shadow-sm bg-white ${
+        props.highlight ? 'ring-2 ring-slate-900' : ''
+      }`}
+    >
+      <div className="flex items-center justify-between mb-3">
+        <span
+          className={`text-xs uppercase tracking-wider px-2 py-1 rounded ${
+            props.highlight ? 'bg-slate-900 text-white' : 'bg-slate-100 text-slate-700'
+          }`}
+        >
+          {props.badge}
+        </span>
+      </div>
+
+      <div className="mb-4">
+        <span className="text-3xl font-extrabold">{props.price}</span>
+        <span className="text-slate-500 ml-2">{props.period}</span>
+      </div>
+
+      <ul className="space-y-2 mb-6">
+        {props.features.map((f, i) => (
+          <li key={i}>✅ {f}</li>
+        ))}
+      </ul>
+
+      <a
+        href={props.href}
+        className={`w-full inline-flex justify-center rounded-full px-5 py-3 font-medium ${
+          props.highlight ? 'bg-slate-900 text-white hover:opacity-90' : 'border hover:bg-slate-100'
+        }`}
+      >
+        {props.cta}
+      </a>
+    </div>
   );
 }
