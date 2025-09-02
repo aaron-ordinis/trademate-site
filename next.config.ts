@@ -68,6 +68,15 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+    async redirects() {
+      return [
+        {
+          source: "/:path*",
+          destination: "https://tradematequotes.com/:path*",
+          permanent: true,
+        },
+      ];
+    },
   // No redirects for vercel.app
 };
 

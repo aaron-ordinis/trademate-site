@@ -1,5 +1,5 @@
 import './globals.css';
-import type { Metadata, Viewport } from 'next';
+import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'TradeMate Quotes — Professional Quotes in Minutes',
@@ -16,24 +16,26 @@ export const metadata: Metadata = {
     'plumbers',
     'electricians',
   ],
-  authors: [{ name: 'TradeMate Quotes', url: 'https://tradematequotes.com' }],
-  metadataBase: new URL('https://tradematequotes.com'),
+  authors: [{ name: 'TradeMate Quotes', url: 'https://trademateapp-site.vercel.app' }],
+  metadataBase: new URL('https://trademateapp-site.vercel.app'),
 
+  // Favicons / Icons
   icons: {
     icon: '/icon.png',
     shortcut: '/icon.png',
     apple: '/apple-touch-icon.png',
   },
 
+  // Open Graph (Facebook, LinkedIn, WhatsApp previews)
   openGraph: {
     title: 'TradeMate Quotes — Professional Quotes in Minutes',
     description:
       'Create AI-powered quotes in minutes. Save time, look professional, and win more work.',
-    url: 'https://tradematequotes.com',
+    url: 'https://trademateapp-site.vercel.app',
     siteName: 'TradeMate Quotes',
     images: [
       {
-        url: '/og-image.png',
+        url: '/og-image.png', // make sure you have this in /public
         width: 1200,
         height: 630,
         alt: 'TradeMate Quotes App Preview',
@@ -43,6 +45,7 @@ export const metadata: Metadata = {
     type: 'website',
   },
 
+  // Twitter Card
   twitter: {
     card: 'summary_large_image',
     title: 'TradeMate Quotes — Professional Quotes in Minutes',
@@ -51,12 +54,9 @@ export const metadata: Metadata = {
     images: ['/og-image.png'],
   },
 
-  manifest: '/site.webmanifest',
-};
-
-// ✅ Move themeColor here
-export const viewport: Viewport = {
+  // App Store / PWA style
   themeColor: '#0f172a',
+  manifest: '/site.webmanifest',
 };
 
 export default function RootLayout({
