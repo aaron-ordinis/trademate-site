@@ -18,7 +18,7 @@ export default function Home() {
           <Image
             src="/logo.png"
             alt="TradeMate Mascot"
-            width={200}   // nice and big
+            width={200}
             height={200}
             priority
             className="select-none pointer-events-none"
@@ -164,11 +164,13 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Footer (unchanged, per your note) */}
+      {/* Footer (now includes FAQs + Delete Account) */}
       <footer className="border-t">
         <div className="mx-auto max-w-5xl px-4 py-6 text-sm text-slate-500 flex flex-col sm:flex-row items-center justify-between gap-3">
           <span>© TradeMate {new Date().getFullYear()}</span>
           <nav className="flex items-center gap-4">
+            <a className="hover:underline" href="/faqs">FAQs</a>
+            <a className="hover:underline" href="/delete-account">Delete Account</a>
             <a className="hover:underline" href="/privacy">Privacy</a>
             <a className="hover:underline" href="/terms">Terms</a>
             <a className="hover:underline" href="/cookies">Cookies</a>
